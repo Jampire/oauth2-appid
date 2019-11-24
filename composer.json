@@ -1,0 +1,48 @@
+{
+    "name": "jampire/oauth2-appid",
+    "description": "IBM App ID OAuth 2.0 Client Provider for The PHP League OAuth2 Client",
+    "homepage": "https://github.com/Jampire/oauth2-appid",
+    "license": "MIT",
+    "keywords": [
+        "oauth",
+        "oauth2",
+        "authorization",
+        "authentication",
+        "idp",
+        "identity",
+        "sso",
+        "single sign on",
+        "php",
+        "api",
+        "client",
+        "ibm",
+        "app id",
+        "saml"
+    ],
+    "authors": [
+        {
+            "name": "Dzianis Kotau",
+            "email": "jampire.blr@gmail.com",
+            "role": "Developer",
+            "homepage": "https://github.com/Jampire"
+        }
+    ],
+    "require": {
+        "league/oauth2-client": "^2.4"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "psr/log": "^1.1",
+        "zendframework/zend-httphandlerrunner": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jampire\\OAuth2\\Client\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jampire\\OAuth2\\Client\\Test\\": "tests/src/"
+        }
+    }
+}
