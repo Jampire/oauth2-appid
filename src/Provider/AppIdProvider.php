@@ -303,12 +303,15 @@ class AppIdProvider extends AbstractProvider
     /**
      * @inheritDoc
      * @author Dzianis Kotau <jampire.blr@gmail.com>
+     * @throws AppIdException
      */
     protected function getAuthorizationParameters(array $options): array
     {
-        if (empty($options['idp'])) {
-            $options['idp'] = $this->getIdp();
+        if (!empty($options['idp'])) {
+            $this->setIdp($options['idp']);
         }
+
+        $options['idp'] = $this->getIdp();
 
         return parent::getAuthorizationParameters($options);
     }
