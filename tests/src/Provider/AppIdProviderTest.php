@@ -8,6 +8,7 @@ use Mockery\Adapter\Phpunit\MockeryTestCase;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Mockery as m;
 use Jampire\OAuth2\Client\Provider\AppIdProvider;
+use Jampire\OAuth2\Client\Provider\AppIdResourceOwner;
 use Jampire\OAuth2\Client\Provider\AppIdException;
 
 /**
@@ -312,7 +313,7 @@ class AppIdProviderTest extends MockeryTestCase
                ->andReturn($postResponse, $userResponse);
         $this->provider->setHttpClient($client);
         $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
-        /** @var \Jampire\OAuth2\Client\Provider\AppIdResourceOwner $user */
+        /** @var AppIdResourceOwner $user */
         $user = $this->provider->getResourceOwner($token);
         $attributes = $user->toArray()['identities'][0]['idpUserInfo']['attributes'];
 
