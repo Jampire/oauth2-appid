@@ -48,14 +48,14 @@ class AppIdProvider extends AbstractProvider
      */
     public function __construct(array $options = [], array $collaborators = [])
     {
-        if (!isset($options['base_auth_uri'], $options['tenant_id'])) {
+        if (empty($options['base_auth_uri']) || empty($options['tenant_id'])) {
             throw new AppIdException('Required fields (base_auth_uri or tenant_id) are missing.');
         }
 
         $this->setBaseAuthUri($options['base_auth_uri']);
         $this->setTenantId($options['tenant_id']);
 
-        if (isset($options['redirect_route'])) {
+        if (!empty($options['redirect_route'])) {
             $this->setRedirectRouteName($options['redirect_route']);
         }
 
