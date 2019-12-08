@@ -1,6 +1,6 @@
-# IBM App Id Provider for OAuth 2.0 Client
+# IBM App ID Provider for OAuth 2.0 Client
 
-This package provides [IBM App Id](https://cloud.ibm.com/catalog/services/app-id#about) OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
+This package provides [IBM App ID](https://cloud.ibm.com/catalog/services/app-id#about) OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
 ## Installation
 
@@ -14,11 +14,11 @@ composer require jampire/oauth2-appid
 
 Usage is the same as The League's OAuth client, using `\Jampire\OAuth2\Client\Provider\AppIdProvider` as the provider.
 
-Use `base_auth_uri` to specify the IBM App Id base server URL. You can lookup the correct value from the Application settings of your IBM App Id service under `oAuthServerUrl` without `tenantId` section, eg. `https://us-south.appid.cloud.ibm.com/oauth/v4`.
+Use `base_auth_uri` to specify the IBM App ID base server URL. You can lookup the correct value from the Application settings of your IBM App ID service under `oAuthServerUrl` without `tenantId` section, eg. `https://us-south.appid.cloud.ibm.com/oauth/v4`.
 
-Use `tenant_id` to specify the IBM App Id tenant ID. You can lookup the correct value from the Application settings of your IBM App Id service under `tenantId`, eg. `abc-zyz-123`.
+Use `tenant_id` to specify the IBM App ID tenant ID. You can lookup the correct value from the Application settings of your IBM App ID service under `tenantId`, eg. `abc-zyz-123`.
 
-All other values you can find in Application settings of your IBM App Id service under.
+All other values you can find in Application settings of your IBM App ID service under.
 
 ### Authorization Code Flow
 
