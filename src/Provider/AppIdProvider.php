@@ -265,7 +265,7 @@ class AppIdProvider extends AbstractProvider
 
         if (is_array($response) === false) {
             throw new UnexpectedValueException(
-                'Invalid response received from Authorization Server. Expected JSON. Got: ' . $response
+                'Invalid response received from Authorization Server. Expected JSON.'
             );
         }
 
@@ -293,7 +293,7 @@ class AppIdProvider extends AbstractProvider
 
         if (is_string($response) === false) {
             throw new UnexpectedValueException(
-                'Invalid response received from Authorization Server. Expected "OK". Got: ' . $response
+                'Invalid response received from Authorization Server. Expected "OK".'
             );
         }
 

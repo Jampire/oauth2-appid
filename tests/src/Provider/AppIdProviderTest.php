@@ -9,6 +9,7 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Mockery as m;
 use Jampire\OAuth2\Client\Provider\AppIdProvider;
 use Jampire\OAuth2\Client\Provider\AppIdException;
+use UnexpectedValueException;
 
 /**
  * Class AppIdProviderTest
@@ -343,6 +344,103 @@ class AppIdProviderTest extends MockeryTestCase
     /**
      * @author Dzianis Kotau <jampire.blr@gmail.com>
      */
+    public function testInvalidLotusNotesId(): void
+    {
+        $lotusNotesId = 'CN=Dzianis Kotau/OUOrg1/OU=Org2/O=IBM@IBMMail';
+
+        $postResponse = m::mock(ResponseInterface::class);
+        $postResponse->shouldReceive('getHeader')
+                     ->times(1)
+                     ->andReturn('application/json');
+        $data = [
+            'access_token' => 'mock_access_token',
+            'id_token' => 'mock_id_token',
+            'refresh_token' => 'mock_refresh_token',
+            'token_type' => 'bearer',
+            'expires_in' => 3600,
+        ];
+        $postResponse->shouldReceive('getBody')
+                     ->times(1)
+                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+
+        $data = [
+            'identities' => [
+                [
+                    'idpUserInfo' => [
+                        'attributes' => [
+                            'lotusnotesid' => $lotusNotesId,
+                        ],
+                    ],
+                ],
+
+            ],
+        ];
+
+        $userResponse = m::mock(ResponseInterface::class);
+        $userResponse->shouldReceive('getHeader')
+                     ->times(1)
+                     ->andReturn('application/json');
+        $userResponse->shouldReceive('getBody')
+                     ->times(1)
+                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+
+        $client = m::mock(ClientInterface::class);
+        $client->shouldReceive('send')
+               ->times(2)
+               ->andReturn($postResponse, $userResponse);
+        $this->provider->setHttpClient($client);
+        $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+        $user = $this->provider->getResourceOwner($token);
+        $attributes = $user->toArray()['identities'][0]['idpUserInfo']['attributes'];
+
+        $this->assertEquals('Dzianis Kotau/Org2/IBM', $user->getLotusNotesId());
+        $this->assertEquals($lotusNotesId, $attributes['lotusnotesid']);
+    }
+
+    /**
+     * @author Dzianis Kotau <jampire.blr@gmail.com>
+     */
+    public function testEmptyLotusNotesId(): void
+    {
+        $postResponse = m::mock(ResponseInterface::class);
+        $postResponse->shouldReceive('getHeader')
+                     ->times(1)
+                     ->andReturn('application/json');
+        $data = [
+            'access_token' => 'mock_access_token',
+            'id_token' => 'mock_id_token',
+            'refresh_token' => 'mock_refresh_token',
+            'token_type' => 'bearer',
+            'expires_in' => 3600,
+        ];
+        $postResponse->shouldReceive('getBody')
+                     ->times(1)
+                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+
+        $data = [];
+
+        $userResponse = m::mock(ResponseInterface::class);
+        $userResponse->shouldReceive('getHeader')
+                     ->times(1)
+                     ->andReturn('application/json');
+        $userResponse->shouldReceive('getBody')
+                     ->times(1)
+                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+
+        $client = m::mock(ClientInterface::class);
+        $client->shouldReceive('send')
+               ->times(2)
+               ->andReturn($postResponse, $userResponse);
+        $this->provider->setHttpClient($client);
+        $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+        $user = $this->provider->getResourceOwner($token);
+
+        $this->assertEquals('', $user->getLotusNotesId());
+    }
+
+    /**
+     * @author Dzianis Kotau <jampire.blr@gmail.com>
+     */
     public function testValidateAccessToken(): void
     {
         $postResponse = m::mock(ResponseInterface::class);
@@ -385,6 +483,46 @@ class AppIdProviderTest extends MockeryTestCase
     /**
      * @author Dzianis Kotau <jampire.blr@gmail.com>
      */
+    public function testInvalidAccessToken(): void
+    {
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage('Invalid response received from Authorization Server. Expected JSON.');
+        $postResponse = m::mock(ResponseInterface::class);
+        $postResponse->shouldReceive('getHeader')
+                     ->times(1)
+                     ->andReturn('application/json');
+        $data = [
+            'access_token' => 'mock_access_token',
+            'id_token' => 'mock_id_token',
+            'refresh_token' => 'mock_refresh_token',
+            'token_type' => 'bearer',
+            'expires_in' => 3600,
+        ];
+        $postResponse->shouldReceive('getBody')
+                     ->times(1)
+                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+
+        $validateResponse = m::mock(ResponseInterface::class);
+        $validateResponse->shouldReceive('getHeader')
+                         ->times(1)
+                         ->andReturn('application/json');
+        $data = 'bad_response';
+        $validateResponse->shouldReceive('getBody')
+                         ->times(1)
+                         ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+
+        $client = m::mock(ClientInterface::class);
+        $client->shouldReceive('send')
+               ->times(2)
+               ->andReturn($postResponse, $validateResponse);
+        $this->provider->setHttpClient($client);
+        $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+        $this->provider->validateAccessToken($token);
+    }
+
+    /**
+     * @author Dzianis Kotau <jampire.blr@gmail.com>
+     */
     public function testRevokeRefreshToken(): void
     {
         $postResponse = m::mock(ResponseInterface::class);
@@ -420,6 +558,46 @@ class AppIdProviderTest extends MockeryTestCase
         $revoked = $this->provider->revokeRefreshToken($token);
 
         $this->assertTrue($revoked);
+    }
+
+    /**
+     * @author Dzianis Kotau <jampire.blr@gmail.com>
+     */
+    public function testInvalidRevokeRefreshToken(): void
+    {
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage('Invalid response received from Authorization Server. Expected "OK".');
+        $postResponse = m::mock(ResponseInterface::class);
+        $postResponse->shouldReceive('getHeader')
+                     ->times(1)
+                     ->andReturn('application/json');
+        $data = [
+            'access_token' => 'mock_access_token',
+            'id_token' => 'mock_id_token',
+            'refresh_token' => 'mock_refresh_token',
+            'token_type' => 'bearer',
+            'expires_in' => 3600,
+        ];
+        $postResponse->shouldReceive('getBody')
+                     ->times(1)
+                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+
+        $validateResponse = m::mock(ResponseInterface::class);
+        $validateResponse->shouldReceive('getHeader')
+                         ->times(1)
+                         ->andReturn('application/json');
+        $data = ['OK'];
+        $validateResponse->shouldReceive('getBody')
+                         ->times(1)
+                         ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+
+        $client = m::mock(ClientInterface::class);
+        $client->shouldReceive('send')
+               ->times(2)
+               ->andReturn($postResponse, $validateResponse);
+        $this->provider->setHttpClient($client);
+        $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+        $this->provider->revokeRefreshToken($token);
     }
 
     /**
