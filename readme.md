@@ -1,5 +1,12 @@
 # IBM App ID Provider for OAuth 2.0 Client
 
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Jampire/oauth2-appid?sort=semver&style=flat-square)](https://github.com/Jampire/oauth2-appid/releases)
+[![Packagist Version (custom server)](https://img.shields.io/packagist/v/Jampire/oauth2-appid?style=flat-square)](https://packagist.org/packages/jampire/oauth2-appid)
+[![GitHub](https://img.shields.io/github/license/Jampire/oauth2-appid?style=flat-square)](LICENSE)
+[![Packagist](https://img.shields.io/packagist/dt/Jampire/oauth2-appid?style=flat-square)](https://packagist.org/packages/jampire/oauth2-appid)
+[![GitHub contributors](https://img.shields.io/github/contributors/Jampire/oauth2-appid?style=flat-square)](https://github.com/Jampire/oauth2-appid/graphs/contributors)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Jampire/oauth2-appid?style=flat-square)](https://github.com/Jampire/oauth2-appid/commits/master)
+
 This package provides [IBM App ID](https://cloud.ibm.com/catalog/services/app-id#about) OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
 ## Installation
@@ -93,6 +100,10 @@ try {
 }
 
 ```
+
+## Examples
+- [Code examples](docs/examples).
+- [Symfony Integration example](docs/FrameworkIntegration/Symfony).
 
 ## Testing
 

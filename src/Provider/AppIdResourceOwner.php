@@ -88,7 +88,7 @@ class AppIdResourceOwner implements ResourceOwnerInterface
      */
     public function getEmail(): string
     {
-        return $this->response['email'] ?? '';
+        return strtolower($this->response['email']) ?? '';
     }
 
     /**
