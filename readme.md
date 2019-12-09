@@ -20,6 +20,8 @@ Use `tenant_id` to specify the IBM App ID tenant ID. You can lookup the correct 
 
 All other values you can find in Application settings of your IBM App ID service under.
 
+Do not forget to register your redirect URL in your IBM App ID whitelist. Read IBM App ID [documentation](https://cloud.ibm.com/docs/services/appid?topic=appid-getting-started).
+
 ### Authorization Code Flow
 
 ```php
