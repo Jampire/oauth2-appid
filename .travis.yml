@@ -1,0 +1,30 @@
+language: php
+
+php:
+  - '7.2'
+  - '7.3'
+  - nightly
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: nightly
+
+before_install:
+  - travis_retry composer self-update
+
+install:
+  - travis_retry composer install --no-interaction --no-progress --no-suggest --prefer-source
+  - travis_retry phpenv rehash
+
+before_script:
+  - mkdir -p build/logs
+
+script:
+  - ./vendor/bin/parallel-lint src tests
+  - ./vendor/bin/phpunit --verbose --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/phpcs src --standard=psr12 -sp
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml

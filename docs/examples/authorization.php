@@ -52,10 +52,10 @@ try {
 
     // We have an access token, which we may use in authenticated
     // requests against the service provider's API.
-    echo '<b>Access Token:</b> ', $accessToken->getToken() , '<br>';
-    echo '<b>Refresh Token:</b> ' , $accessToken->getRefreshToken() , '<br>';
-    echo '<b>Expired in:</b> ' , $accessToken->getExpires() , '<br>';
-    echo '<b>Already expired?</b> ' , ($accessToken->hasExpired() ? 'expired' : 'not expired') , '<br>';
+    echo '<b>Access Token:</b> ', $accessToken->getToken(), '<br>';
+    echo '<b>Refresh Token:</b> ' , $accessToken->getRefreshToken(), '<br>';
+    echo '<b>Expired in:</b> ' , $accessToken->getExpires(), '<br>';
+    echo '<b>Already expired?</b> ' , ($accessToken->hasExpired() ? 'expired' : 'not expired'), '<br>';
 
     // Using the access token, we may look up details about the
     // resource owner.
