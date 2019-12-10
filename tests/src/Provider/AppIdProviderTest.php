@@ -130,7 +130,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $response->shouldReceive('getBody')
                  ->times(1)
-                 ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                 ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')->times(1)->andReturn($response);
@@ -211,7 +211,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $response->shouldReceive('getBody')
                  ->times(1)
-                 ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                 ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')->times(1)->andReturn($response);
@@ -244,7 +244,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $response->shouldReceive('getBody')
                  ->times(1)
-                 ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                 ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')->times(1)->andReturn($response);
@@ -277,7 +277,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $postResponse->shouldReceive('getBody')
                  ->times(1)
-                 ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                 ->andReturn(json_encode($data));
 
         $data = [
             'sub' => $userId,
@@ -305,7 +305,7 @@ class AppIdProviderTest extends MockeryTestCase
                      ->andReturn('application/json');
         $userResponse->shouldReceive('getBody')
                      ->times(1)
-                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                     ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')
@@ -361,7 +361,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $postResponse->shouldReceive('getBody')
                      ->times(1)
-                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                     ->andReturn(json_encode($data));
 
         $data = [
             'identities' => [
@@ -382,7 +382,7 @@ class AppIdProviderTest extends MockeryTestCase
                      ->andReturn('application/json');
         $userResponse->shouldReceive('getBody')
                      ->times(1)
-                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                     ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')
@@ -415,7 +415,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $postResponse->shouldReceive('getBody')
                      ->times(1)
-                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                     ->andReturn(json_encode($data));
 
         $data = [];
 
@@ -425,7 +425,7 @@ class AppIdProviderTest extends MockeryTestCase
                      ->andReturn('application/json');
         $userResponse->shouldReceive('getBody')
                      ->times(1)
-                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                     ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')
@@ -456,7 +456,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $postResponse->shouldReceive('getBody')
                      ->times(1)
-                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                     ->andReturn(json_encode($data));
 
         $validateResponse = m::mock(ResponseInterface::class);
         $validateResponse->shouldReceive('getHeader')
@@ -467,7 +467,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $validateResponse->shouldReceive('getBody')
                          ->times(1)
-                         ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                         ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')
@@ -500,7 +500,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $postResponse->shouldReceive('getBody')
                      ->times(1)
-                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                     ->andReturn(json_encode($data));
 
         $validateResponse = m::mock(ResponseInterface::class);
         $validateResponse->shouldReceive('getHeader')
@@ -509,7 +509,7 @@ class AppIdProviderTest extends MockeryTestCase
         $data = 'bad_response';
         $validateResponse->shouldReceive('getBody')
                          ->times(1)
-                         ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                         ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')
@@ -538,7 +538,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $postResponse->shouldReceive('getBody')
                      ->times(1)
-                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                     ->andReturn(json_encode($data));
 
         $validateResponse = m::mock(ResponseInterface::class);
         $validateResponse->shouldReceive('getHeader')
@@ -547,7 +547,7 @@ class AppIdProviderTest extends MockeryTestCase
         $data = 'OK';
         $validateResponse->shouldReceive('getBody')
                          ->times(1)
-                         ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                         ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')
@@ -580,7 +580,7 @@ class AppIdProviderTest extends MockeryTestCase
         ];
         $postResponse->shouldReceive('getBody')
                      ->times(1)
-                     ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                     ->andReturn(json_encode($data));
 
         $validateResponse = m::mock(ResponseInterface::class);
         $validateResponse->shouldReceive('getHeader')
@@ -589,7 +589,7 @@ class AppIdProviderTest extends MockeryTestCase
         $data = ['OK'];
         $validateResponse->shouldReceive('getBody')
                          ->times(1)
-                         ->andReturn(json_encode($data, JSON_THROW_ON_ERROR, 512));
+                         ->andReturn(json_encode($data));
 
         $client = m::mock(ClientInterface::class);
         $client->shouldReceive('send')

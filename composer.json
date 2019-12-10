@@ -30,6 +30,7 @@
         }
     ],
     "require": {
+        "php": "^7.1",
         "league/oauth2-client": "^2.4"
     },
     "require-dev": {

@@ -7,7 +7,7 @@ We accept contributions via Pull Requests on [Github](https://github.com/Jampire
 
 ## Pull Requests
 
-- **[PSR-12 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-12-extended-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer).
+- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer).
 
 - **Add tests!** - Your patch won't be accepted if it doesn't have tests.
 
@@ -23,7 +23,7 @@ We accept contributions via Pull Requests on [Github](https://github.com/Jampire
 
 - **Ensure tests pass!** - Please run the tests (see below) before submitting your pull request, and make sure they pass. We won't accept a patch until all tests pass.
 
-- **Ensure no coding standards violations** - Please run PHP Code Sniffer using the PSR-12 standard (see below) before submitting your pull request. A violation will cause the build to fail, so please make sure there are no violations. We can't accept a patch if the build fails.
+- **Ensure no coding standards violations** - Please run PHP Code Sniffer using the PSR-2 standard (see below) before submitting your pull request. A violation will cause the build to fail, so please make sure there are no violations. We can't accept a patch if the build fails.
 
 
 ## Running Tests
@@ -36,7 +36,7 @@ $ ./vendor/bin/phpunit
 ## Running PHP Code Sniffer
 
 ``` bash
-$ ./vendor/bin/phpcs src --standard=psr12 -sp
+$ ./vendor/bin/phpcs src --standard=psr2 -sp
 ```
 
 **Happy coding**!
