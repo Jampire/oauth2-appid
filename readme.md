@@ -27,9 +27,9 @@ composer require jampire/oauth2-appid
 
 Usage is the same as The League's OAuth client, using `\Jampire\OAuth2\Client\Provider\AppIdProvider` as the provider.
 
-Use `base_auth_uri` to specify the IBM App ID base server URL. You can lookup the correct value from the Application settings of your IBM App ID service under `oAuthServerUrl` without `tenantId` section, eg. `https://us-south.appid.cloud.ibm.com/oauth/v4`.
+Use `baseAuthUri` to specify the IBM App ID base server URL. You can lookup the correct value from the Application settings of your IBM App ID service under `oAuthServerUrl` without `tenantId` section, eg. `https://us-south.appid.cloud.ibm.com/oauth/v4`.
 
-Use `tenant_id` to specify the IBM App ID tenant ID. You can lookup the correct value from the Application settings of your IBM App ID service under `tenantId`, eg. `abc-zyz-123`.
+Use `tenantId` to specify the IBM App ID tenant ID. You can lookup the correct value from the Application settings of your IBM App ID service under `tenantId`, eg. `abc-zyz-123`.
 
 All other values you can find in Application settings of your IBM App ID service under.
 
@@ -49,8 +49,8 @@ session_start();
 
 try {
     $provider = new AppIdProvider([
-        'base_auth_uri' => '{base_auth_uri}',
-        'tenant_id'     => '{tenant_id}',
+        'baseAuthUri'   => '{baseAuthUri}',
+        'tenantId'      => '{tenantId}',
         'clientId'      => '{clientId}',
         'clientSecret'  => '{clientSecret}',
         'redirectUri'   => '{redirectUri}',
@@ -92,10 +92,10 @@ try {
 
     // We have an access token, which we may use in authenticated
     // requests against the service provider's API.
-    echo '<b>Access Token:</b> ', $accessToken->getToken() , '<br>';
-    echo '<b>Refresh Token:</b> ' , $accessToken->getRefreshToken() , '<br>';
-    echo '<b>Expired in:</b> ' , $accessToken->getExpires() , '<br>';
-    echo '<b>Already expired?</b> ' , ($accessToken->hasExpired() ? 'expired' : 'not expired') , '<br>';
+    echo '<b>Access Token:</b> ', $accessToken->getToken(), '<br>';
+    echo '<b>Refresh Token:</b> ', $accessToken->getRefreshToken(), '<br>';
+    echo '<b>Expired in:</b> ', $accessToken->getExpires(), '<br>';
+    echo '<b>Already expired?</b> ', ($accessToken->hasExpired() ? 'expired' : 'not expired'), '<br>';
 
     // Using the access token, we may look up details about the
     // resource owner.

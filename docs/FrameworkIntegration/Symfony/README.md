@@ -118,6 +118,43 @@ class AppIdController extends AbstractController
 }
 ```
 
+Create HomeController
+
+```php
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * Class HomeController
+ *
+ * @author  Dzianis Kotau <jampire.blr@gmail.com>
+ * @package App\Controller
+ */
+class HomeController extends AbstractController
+{
+    /**
+     * @Route("/", name="home")
+     * @return JsonResponse
+     * @author  Dzianis Kotau <jampire.blr@gmail.com>
+     */
+    public function home(): JsonResponse
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        return new JsonResponse([
+            'name' => $this->getUser()->getFullName(),
+            'email' => $this->getUser()->getEmail(),
+        ]);
+    }
+}
+
+```
+
 ### Step 3 - Add the guard authenticator
 
 Create IBM App ID authenticator guard. Below code block is published under MIT license. Please see [License File](https://github.com/Jampire/oauth2-appid/blob/master/LICENSE) for more information.
