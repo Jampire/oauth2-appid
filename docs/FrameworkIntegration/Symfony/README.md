@@ -1,5 +1,7 @@
 # Symfony Framework Integration
 
+**TODO: review this documentation for v2 version.**
+
 Full documentation for adding providers is available at [KnpUOAuth2ClientBundle](https://github.com/knpuniversity/oauth2-client-bundle).
 This example is based on [Symfony v4.3](https://symfony.com).
 
@@ -27,33 +29,32 @@ security:
 # config/packages/knpu_oauth2_client.yaml
 knpu_oauth2_client:
     clients:
-        appid_main:
+        appid:
             type: generic
             provider_class: Jampire\OAuth2\Client\Provider\AppIdProvider
 
             # optional: a class that extends OAuth2Client
             client_class: App\Security\AppIdClient
 
-            provider_options: {base_auth_uri: '%env(appid_base_auth_uri)%',
-                               tenant_id: '%env(appid_tenant_id)%',
-                               redirect_route: '%env(appid_redirect_route)%',
-                               idp: '%env(appid_idp)%'}
+            provider_options: {baseAuthUri: '%env(OAUTH_APPID_BASE_AUTH_URI)%',
+                               tenantId: '%env(OAUTH_APPID_TENANT_ID)%',
+                               idp: '%env(OAUTH_APPID_IDP)%'}
 
             # now, all the normal options!
-            client_id: '%env(appid_client_id)%'
-            client_secret: '%env(appid_client_secret)%'
-            redirect_route: '%env(appid_redirect_route)%'
+            client_id: '%env(OAUTH_APPID_CLIENT_ID)%'
+            client_secret: '%env(OAUTH_APPID_CLIENT_SECRET)%'
+            redirect_route: '%env(OAUTH_APPID_REDIRECT_ROUTE)%'
             redirect_params: {}
 ```
 
 Add your credentials in env
 ```dotenv
-appid_base_auth_uri=https://xxx.appid.cloud.ibm.com/oauth/v4
-appid_redirect_route=connect_check_appid
-appid_idp=saml
-appid_tenant_id=xxxxxxxxxxxxxxxxxxxxxxxxxx
-appid_client_id=xxxxxxxxxxxxxxxxxxxxxxxxxx
-appid_client_secret=xxxxxxxxxxxxxxxxxxxxxx
+OAUTH_APPID_BASE_AUTH_URI=https://xxx.appid.cloud.ibm.com/oauth/v4
+OAUTH_APPID_REDIRECT_ROUTE=connect_appid_check
+OAUTH_APPID_IDP=saml
+OAUTH_APPID_TENANT_ID=xxxxxxxxxxxxxxxxxxxxxxxxxx
+OAUTH_APPID_CLIENT_ID=xxxxxxxxxxxxxxxxxxxxxxxxxx
+OAUTH_APPID_CLIENT_SECRET=xxxxxxxxxxxxxxxxxxxxxx
 ```
 
 ### Step 2 - Add the client controller
@@ -92,11 +93,11 @@ class AppIdController extends AbstractController
      */
     public function connect(ClientRegistry $clientRegistry): RedirectResponse
     {
-        return $clientRegistry->getClient('appid_main')->redirect();
+        return $clientRegistry->getClient('appid')->redirect();
     }
 
     /**
-     * @Route("/connect/check", name="connect_check_appid")
+     * @Route("/connect/check", name="connect_appid_check")
      *
      * Callback route
      *
@@ -218,7 +219,7 @@ class AppIdAuthenticator extends SocialAuthenticator
      */
     private function getClient(): OAuth2ClientInterface
     {
-        return $this->clientRegistry->getClient('appid_main');
+        return $this->clientRegistry->getClient('appid');
     }
 
     /**

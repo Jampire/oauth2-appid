@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Jampire\OAuth2\Client\Provider\AppIdProvider;
 use Jampire\OAuth2\Client\Provider\AppIdResourceOwner;
@@ -10,8 +10,8 @@ session_start();
 
 try {
     $provider = new AppIdProvider([
-        'base_auth_uri' => '',
-        'tenant_id'     => '',
+        'baseAuthUri' => '',
+        'tenantId'     => '',
         'clientId'      => '',
         'clientSecret'  => '',
         'redirectUri'   => '',

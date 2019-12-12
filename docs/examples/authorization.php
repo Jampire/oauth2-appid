@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Jampire\OAuth2\Client\Provider\AppIdProvider;
 use Jampire\OAuth2\Client\Provider\AppIdException;
@@ -9,8 +9,8 @@ session_start();
 
 try {
     $provider = new AppIdProvider([
-        'base_auth_uri' => '',
-        'tenant_id'     => '',
+        'baseAuthUri' => '',
+        'tenantId'     => '',
         'clientId'      => '',
         'clientSecret'  => '',
         'redirectUri'   => '',
@@ -53,9 +53,9 @@ try {
     // We have an access token, which we may use in authenticated
     // requests against the service provider's API.
     echo '<b>Access Token:</b> ', $accessToken->getToken(), '<br>';
-    echo '<b>Refresh Token:</b> ' , $accessToken->getRefreshToken(), '<br>';
-    echo '<b>Expired in:</b> ' , $accessToken->getExpires(), '<br>';
-    echo '<b>Already expired?</b> ' , ($accessToken->hasExpired() ? 'expired' : 'not expired'), '<br>';
+    echo '<b>Refresh Token:</b> ', $accessToken->getRefreshToken(), '<br>';
+    echo '<b>Expired in:</b> ', $accessToken->getExpires(), '<br>';
+    echo '<b>Already expired?</b> ', ($accessToken->hasExpired() ? 'expired' : 'not expired'), '<br>';
 
     // Using the access token, we may look up details about the
     // resource owner.

@@ -29,9 +29,6 @@ class AppIdProviderTest extends MockeryTestCase
     protected $tenantId = 'mock_tenant_id';
 
     /** @var string */
-    protected $redirectRoute = 'mock_redirect_route';
-
-    /** @var string */
     protected $clientId = 'mock_client_id';
 
     /** @var string */
@@ -46,9 +43,8 @@ class AppIdProviderTest extends MockeryTestCase
     public function setUp(): void
     {
         $this->provider = new AppIdProvider([
-            'base_auth_uri' => $this->baseAuthUri,
-            'tenant_id' => $this->tenantId,
-            'redirect_route' => $this->redirectRoute,
+            'baseAuthUri' => $this->baseAuthUri,
+            'tenantId' => $this->tenantId,
             'clientId' => $this->clientId,
             'clientSecret' => $this->clientSecret,
             'redirectUri' => $this->redirectUri,
@@ -163,14 +159,6 @@ class AppIdProviderTest extends MockeryTestCase
         $uri = parse_url($url);
 
         $this->assertEquals($this->baseAuthUri . '/' . $this->tenantId . '/revoke', $uri['path']);
-    }
-
-    /**
-     * @author Dzianis Kotau <jampire.blr@gmail.com>
-     */
-    public function testGetRedirectRouteName(): void
-    {
-        $this->assertEquals($this->redirectRoute, $this->provider->getRedirectRouteName());
     }
 
     /**
@@ -615,34 +603,11 @@ class AppIdProviderTest extends MockeryTestCase
     /**
      * @author Dzianis Kotau <jampire.blr@gmail.com>
      */
-    public function testAllowedIdp(): void
-    {
-        $url = $this->provider->getAuthorizationUrl(['idp' => AppIdProvider::IDP_GOOGLE]);
-        $uri = parse_url($url);
-        parse_str($uri['query'], $query);
-
-        $this->assertEquals(AppIdProvider::IDP_GOOGLE, $query['idp']);
-    }
-
-    /**
-     * @author Dzianis Kotau <jampire.blr@gmail.com>
-     */
-    public function testDisallowedIdp(): void
-    {
-        $this->expectException(AppIdException::class);
-        $this->expectExceptionMessage('IDP "not_allowed" is not supported.');
-        $this->provider->getAuthorizationUrl(['idp' => 'not_allowed']);
-    }
-
-    /**
-     * @author Dzianis Kotau <jampire.blr@gmail.com>
-     */
     public function testErrorInitialization(): void
     {
         $this->expectException(AppIdException::class);
-        $this->expectExceptionMessage('Required fields (base_auth_uri or tenant_id) are missing.');
+        $this->expectExceptionMessage('Required fields ("baseAuthUri" or "tenantId") are missing.');
         $provider = new AppIdProvider([
-            'redirect_route' => $this->redirectRoute,
             'clientId' => $this->clientId,
             'clientSecret' => $this->clientSecret,
             'redirectUri' => $this->redirectUri,

@@ -22,21 +22,15 @@ class AppIdProvider extends AbstractProvider
     use BearerAuthorizationTrait;
 
     public const IDP_SAML = 'saml';
-    public const IDP_ANON = 'appid_anon';
-    public const IDP_FACEBOOK = 'facebook';
-    public const IDP_GOOGLE = 'google';
 
     /** @var string */
-    private $baseAuthUri;
+    protected $baseAuthUri;
 
     /** @var string */
-    private $tenantId;
+    protected $tenantId;
 
     /** @var string */
-    private $redirectRouteName;
-
-    /** @var string */
-    private $idp;
+    protected $idp;
 
     /**
      * AppIdProvider constructor.
@@ -48,21 +42,13 @@ class AppIdProvider extends AbstractProvider
      */
     public function __construct(array $options = [], array $collaborators = [])
     {
-        if (empty($options['base_auth_uri']) || empty($options['tenant_id'])) {
-            throw new AppIdException('Required fields (base_auth_uri or tenant_id) are missing.');
+        if (empty($options['baseAuthUri']) || empty($options['tenantId'])) {
+            throw new AppIdException('Required fields ("baseAuthUri" or "tenantId") are missing.');
         }
 
-        $this->setBaseAuthUri($options['base_auth_uri']);
-        $this->setTenantId($options['tenant_id']);
-
-        if (!empty($options['redirect_route'])) {
-            $this->setRedirectRouteName($options['redirect_route']);
+        if (empty($options['idp'])) {
+            $options['idp'] = self::IDP_SAML;
         }
-
-        $idp = empty($options['idp']) ? self::IDP_SAML : $options['idp'];
-        $this->setIdp($idp);
-
-        unset($options['base_auth_uri'], $options['tenant_id'], $options['redirect_route'], $options['idp'], $idp);
 
         $collaborators['optionProvider'] = new HttpBasicAuthOptionProvider();
 
@@ -183,15 +169,6 @@ class AppIdProvider extends AbstractProvider
      * @author Dzianis Kotau <jampire.blr@gmail.com>
      * @return string
      */
-    public function getRedirectRouteName(): string
-    {
-        return $this->redirectRouteName;
-    }
-
-    /**
-     * @author Dzianis Kotau <jampire.blr@gmail.com>
-     * @return string
-     */
     public function getIdp(): string
     {
         return $this->idp;
@@ -303,78 +280,13 @@ class AppIdProvider extends AbstractProvider
     /**
      * @inheritDoc
      * @author Dzianis Kotau <jampire.blr@gmail.com>
-     * @throws AppIdException
      */
     protected function getAuthorizationParameters(array $options): array
     {
-        if (!empty($options['idp'])) {
-            $this->setIdp($options['idp']);
+        if (empty($options['idp'])) {
+            $options['idp'] = $this->idp = self::IDP_SAML;
         }
-
-        $options['idp'] = $this->getIdp();
 
         return parent::getAuthorizationParameters($options);
-    }
-
-    /**
-     * @param string $baseUri
-     *
-     * @author Dzianis Kotau <jampire.blr@gmail.com>
-     * @return self
-     */
-    private function setBaseAuthUri(string $baseUri): self
-    {
-        $this->baseAuthUri = $baseUri;
-
-        return $this;
-    }
-
-    /**
-     * @param string $tenantId
-     *
-     * @author Dzianis Kotau <jampire.blr@gmail.com>
-     * @return self
-     */
-    private function setTenantId(string $tenantId): self
-    {
-        $this->tenantId = $tenantId;
-
-        return $this;
-    }
-
-    /**
-     * @param string $redirectRouteName
-     *
-     * @author Dzianis Kotau <jampire.blr@gmail.com>
-     * @return self
-     */
-    private function setRedirectRouteName(string $redirectRouteName): self
-    {
-        $this->redirectRouteName = $redirectRouteName;
-
-        return $this;
-    }
-
-    /**
-     * @author Dzianis Kotau <jampire.blr@gmail.com>
-     * @param string $idp
-     *
-     * @throws AppIdException
-     * @return self
-     */
-    private function setIdp(string $idp): self
-    {
-        if (!in_array($idp, [
-            self::IDP_SAML,
-            self::IDP_ANON,
-            self::IDP_FACEBOOK,
-            self::IDP_GOOGLE,
-        ], true)) {
-            throw new AppIdException('IDP "' . $idp . '" is not supported.');
-        }
-
-        $this->idp = $idp;
-
-        return $this;
     }
 }
