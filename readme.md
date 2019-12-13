@@ -29,11 +29,11 @@ Usage is the same as The League's OAuth client, using `\Jampire\OAuth2\Client\Pr
 
 Use `baseAuthUri` to specify the IBM App ID base server URL. You can lookup the correct value from the Application settings of your IBM App ID service under `oAuthServerUrl` without `tenantId` section, eg. `https://us-south.appid.cloud.ibm.com/oauth/v4`.
 
-Use `tenantId` to specify the IBM App ID tenant ID. You can lookup the correct value from the Application settings of your IBM App ID service under `tenantId`, eg. `abc-zyz-123`.
+Use `tenantId` to specify the IBM App ID tenant ID. You can lookup the correct value from the Application settings of your IBM App ID service under `tenantId`, eg. `abcd-efgh-1234-5678-mnop`.
 
-All other values you can find in Application settings of your IBM App ID service under.
+All other values you can find in Application settings of your IBM App ID service.
 
-Do not forget to register your redirect URL in your IBM App ID whitelist. Read IBM App ID [documentation](https://cloud.ibm.com/docs/services/appid?topic=appid-getting-started).
+Do not forget to register your redirect URL in your IBM App ID whitelist. Please, read IBM App ID [documentation](https://cloud.ibm.com/docs/services/appid?topic=appid-getting-started).
 
 ### Authorization Code Flow
 

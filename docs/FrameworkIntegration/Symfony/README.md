@@ -1,6 +1,7 @@
 # Symfony Framework Integration
 
-**TODO: review this documentation for v2 version.**
+This documentation is for generic type provider. As soon as IBM App ID provider will be included into [knpuniversity/oauth2-client-bundle](knpuniversity/oauth2-client-bundle
+), this documentation will be updated. 
 
 Full documentation for adding providers is available at [KnpUOAuth2ClientBundle](https://github.com/knpuniversity/oauth2-client-bundle).
 This example is based on [Symfony v4.3](https://symfony.com).
@@ -36,9 +37,7 @@ knpu_oauth2_client:
             # optional: a class that extends OAuth2Client
             client_class: App\Security\AppIdClient
 
-            provider_options: {baseAuthUri: '%env(OAUTH_APPID_BASE_AUTH_URI)%',
-                               tenantId: '%env(OAUTH_APPID_TENANT_ID)%',
-                               idp: '%env(OAUTH_APPID_IDP)%'}
+            provider_options: {baseAuthUri: '%env(OAUTH_APPID_BASE_AUTH_URI)%',tenantId: '%env(OAUTH_APPID_TENANT_ID)%',idp: '%env(OAUTH_APPID_IDP)%',redirectRouteName: '%env(OAUTH_APPID_REDIRECT_ROUTE)%'}
 
             # now, all the normal options!
             client_id: '%env(OAUTH_APPID_CLIENT_ID)%'
@@ -167,7 +166,6 @@ namespace App\Security;
 use KnpU\OAuth2ClientBundle\Client\OAuth2ClientInterface;
 use KnpU\OAuth2ClientBundle\Security\Authenticator\SocialAuthenticator;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
-use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -240,7 +238,6 @@ class AppIdAuthenticator extends SocialAuthenticator
      * @param UserInterface $user
      *
      * @return bool
-     * @throws IdentityProviderException
      * @author Dzianis Kotau <jampire.blr@gmail.com>
      */
     public function checkCredentials($credentials, UserInterface $user): bool
