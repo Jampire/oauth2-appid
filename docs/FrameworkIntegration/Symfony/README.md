@@ -1,6 +1,6 @@
 # Symfony Framework Integration
 
-This documentation is for generic type provider. As soon as IBM App ID provider will be included into [knpuniversity/oauth2-client-bundle](knpuniversity/oauth2-client-bundle
+This documentation is for generic type provider. As soon as IBM App ID provider will be included into [knpuniversity/oauth2-client-bundle](https://github.com/knpuniversity/oauth2-client-bundle
 ), this documentation will be updated. 
 
 Full documentation for adding providers is available at [KnpUOAuth2ClientBundle](https://github.com/knpuniversity/oauth2-client-bundle).
