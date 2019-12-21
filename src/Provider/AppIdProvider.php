@@ -33,7 +33,7 @@ class AppIdProvider extends AbstractProvider
     protected $idp;
 
     /** @var string */
-    protected $redirectRouteName;
+    protected $redirectRoute;
 
     /**
      * AppIdProvider constructor.
@@ -181,9 +181,9 @@ class AppIdProvider extends AbstractProvider
      * @author Dzianis Kotau <jampire.blr@gmail.com>
      * @return string
      */
-    public function getRedirectRouteName(): ?string
+    public function getRedirectRoute(): ?string
     {
-        return $this->redirectRouteName;
+        return $this->redirectRoute;
     }
 
     /**

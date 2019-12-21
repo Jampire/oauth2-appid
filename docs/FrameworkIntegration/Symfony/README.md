@@ -37,7 +37,7 @@ knpu_oauth2_client:
             # optional: a class that extends OAuth2Client
             client_class: App\Security\AppIdClient
 
-            provider_options: {baseAuthUri: '%env(OAUTH_APPID_BASE_AUTH_URI)%',tenantId: '%env(OAUTH_APPID_TENANT_ID)%',idp: '%env(OAUTH_APPID_IDP)%',redirectRouteName: '%env(OAUTH_APPID_REDIRECT_ROUTE)%'}
+            provider_options: {baseAuthUri: '%env(OAUTH_APPID_BASE_AUTH_URI)%',tenantId: '%env(OAUTH_APPID_TENANT_ID)%',idp: '%env(OAUTH_APPID_IDP)%',redirectRoute: '%env(OAUTH_APPID_REDIRECT_ROUTE)%'}
 
             # now, all the normal options!
             client_id: '%env(OAUTH_APPID_CLIENT_ID)%'
@@ -207,7 +207,7 @@ class AppIdAuthenticator extends SocialAuthenticator
         $provider = $this->getClient()->getOAuth2Provider();
 
         return ($request->isMethod('GET') &&
-                $request->getPathInfo() === $this->router->generate($provider->getRedirectRouteName()));
+                $request->getPathInfo() === $this->router->generate($provider->getRedirectRoute()));
     }
 
     /**

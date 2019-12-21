@@ -617,15 +617,15 @@ class AppIdProviderTest extends MockeryTestCase
     /**
      * @author Dzianis Kotau <jampire.blr@gmail.com>
      */
-    public function testEmptyRedirectRouteName(): void
+    public function testEmptyRedirectRoute(): void
     {
-        $this->assertEmpty($this->provider->getRedirectRouteName());
+        $this->assertEmpty($this->provider->getRedirectRoute());
     }
 
     /**
      * @author Dzianis Kotau <jampire.blr@gmail.com>
      */
-    public function testRedirectRouteName(): void
+    public function testRedirectRoute(): void
     {
         $provider = new AppIdProvider([
             'baseAuthUri' => $this->baseAuthUri,
@@ -633,9 +633,9 @@ class AppIdProviderTest extends MockeryTestCase
             'clientId' => $this->clientId,
             'clientSecret' => $this->clientSecret,
             'redirectUri' => $this->redirectUri,
-            'redirectRouteName' => 'mock_redirect_route_name',
+            'redirectRoute' => 'mock_redirect_route',
         ]);
 
-        $this->assertEquals('mock_redirect_route_name', $provider->getRedirectRouteName());
+        $this->assertEquals('mock_redirect_route', $provider->getRedirectRoute());
     }
 }
