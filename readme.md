@@ -14,6 +14,7 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/Jampire/oauth2-appid/issues)
 
 This package provides [IBM App ID](https://cloud.ibm.com/catalog/services/app-id#about) OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
+Please, read [this page](https://dzianiskotau.com/php/ibm-app-id-provider-oauth2-client/) for full documentation.
 
 ## Installation
 
