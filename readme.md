@@ -5,7 +5,6 @@
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/jampire/oauth2-appid?style=flat-square)](https://github.com/Jampire/oauth2-appid/releases)
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/Jampire/oauth2-appid?style=flat-square)](https://packagist.org/packages/jampire/oauth2-appid)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Jampire/oauth2-appid/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Jampire/oauth2-appid/?branch=master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/Jampire/oauth2-appid/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/Jampire/oauth2-appid?sort=semver&style=flat-square)](https://github.com/Jampire/oauth2-appid/releases)
 [![GitHub](https://img.shields.io/github/license/Jampire/oauth2-appid?style=flat-square)](LICENSE)
 [![Packagist](https://img.shields.io/packagist/dt/Jampire/oauth2-appid?style=flat-square)](https://packagist.org/packages/jampire/oauth2-appid)
