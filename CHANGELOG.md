@@ -1,3 +1,6 @@
+## 2.0.5 - 2.0.6
+Documentation updates
+
 ## 2.0.4
 Redirect Route refactor
 
