@@ -21,7 +21,7 @@ class AppIdProvider extends AbstractProvider
 {
     use BearerAuthorizationTrait;
 
-    public const IDP_SAML = 'saml';
+    const IDP_SAML = 'saml';
 
     /** @var string */
     protected $baseAuthUri;
@@ -179,9 +179,9 @@ class AppIdProvider extends AbstractProvider
 
     /**
      * @author Dzianis Kotau <jampire.blr@gmail.com>
-     * @return string
+     * @return string|null
      */
-    public function getRedirectRoute(): ?string
+    public function getRedirectRoute()
     {
         return $this->redirectRoute;
     }
@@ -208,7 +208,7 @@ class AppIdProvider extends AbstractProvider
      * @return void
      * @throws IdentityProviderException
      */
-    protected function checkResponse(ResponseInterface $response, $data): void
+    protected function checkResponse(ResponseInterface $response, $data)
     {
         if (!empty($data['error'])) {
             $error = $data['error'] . ': ' . $data['error_description'];

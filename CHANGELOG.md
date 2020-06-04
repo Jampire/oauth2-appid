@@ -1,4 +1,7 @@
-## 2.0.5 - 2.0.6
+## 2.0.8
+PHP 7.0 support
+
+## 2.0.5 - 2.0.7
 Documentation updates
 
 ## 2.0.4
